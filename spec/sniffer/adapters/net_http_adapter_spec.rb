@@ -31,13 +31,6 @@ RSpec.describe Net::HTTP do
     http.request(request)
   end
 
-  def load_yaml(path = nil)
-    yaml_directory = "#{Dir.pwd}/spec/yaml"
-    file_path = "#{yaml_directory}/#{path}.yaml"
-    file = File.read(file_path)
-    YAML.load(file)
-  end
-
   let(:handler) do
     Class.new do
       attr_reader :data
