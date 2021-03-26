@@ -3,7 +3,7 @@
 require "net/http"
 require "benchmark"
 
-module Sniffer
+class LittleSniffer
   module Adapters
     class NetHttpAdapter
       def initialize(handler)

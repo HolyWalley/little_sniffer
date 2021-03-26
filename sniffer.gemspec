@@ -1,17 +1,17 @@
 # coding: utf-8
 lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "sniffer/version"
+require "little_sniffer/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "sniffer"
-  spec.version       = Sniffer::VERSION
-  spec.authors       = ["Andrey Deryabin"]
-  spec.email         = ["aderyabin@evilmartians.com"]
+  spec.name          = "little_sniffer"
+  spec.version       = LittleSniffer::VERSION
+  spec.authors       = ["Yakau Kranou"]
+  spec.email         = ["yasha.krasnov@gmail.com"]
 
   spec.summary       = %q{Analyze HTTP Requests}
   spec.description   = %q{Analyze HTTP Requests}
-  spec.homepage      = "http://github.com/aderyabin/sniffer"
+  spec.homepage      = "http://github.com/HolyWalley/little_sniffer"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0").reject do |f|

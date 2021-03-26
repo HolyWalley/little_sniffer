@@ -15,7 +15,7 @@ require "ethon"
 require "em-http-request"
 require "excon"
 
-require "sniffer"
+require "little_sniffer"
 require "pry-byebug"
 
 Dir[File.expand_path(File.join(File.dirname(__FILE__), 'support', '**', '*.rb'))].sort.each { |f| require f }

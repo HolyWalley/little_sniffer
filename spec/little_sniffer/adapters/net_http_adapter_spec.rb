@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe Net::HTTP do
+RSpec.describe LittleSniffer::Adapters::NetHttpAdapter do
   def get_request
     uri = URI.parse('http://localhost:4567/?lang=ruby&author=matz')
     Net::HTTP.get(uri)
@@ -46,7 +46,7 @@ RSpec.describe Net::HTTP do
   it 'calls handler and pass data on get request' do
     allow(handler).to receive(:handle)
 
-    Sniffer::Adapters::NetHttpAdapter.new(handler).sniff do
+    described_class.new(handler).sniff do
       get_request
     end
 
@@ -56,7 +56,7 @@ RSpec.describe Net::HTTP do
   it 'calls handler and pass data on get request with dynamic params' do
     allow(handler).to receive(:handle)
 
-    Sniffer::Adapters::NetHttpAdapter.new(handler).sniff do
+    described_class.new(handler).sniff do
       get_request_dynamic_params
     end
 
@@ -68,7 +68,7 @@ RSpec.describe Net::HTTP do
 
     expect(handler.data).to eq(nil)
 
-    Sniffer::Adapters::NetHttpAdapter.new(handler).sniff do
+    described_class.new(handler).sniff do
       post_request
     end
 
@@ -78,7 +78,7 @@ RSpec.describe Net::HTTP do
   it 'calls handler and pass data on json post request' do
     allow(handler).to receive(:handle)
 
-    Sniffer::Adapters::NetHttpAdapter.new(handler).sniff do
+    described_class.new(handler).sniff do
       post_json
     end
 
