@@ -26,12 +26,4 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "pry-byebug"
   spec.add_development_dependency "sinatra", "~> 2.0"
   spec.add_development_dependency "puma", ">= 3.10.0"
-  spec.add_development_dependency "httpclient", ">= 2.8.3"
-  spec.add_development_dependency "http", ">= 3.0.0"
-  spec.add_development_dependency "patron", ">= 0.10.0"
-  spec.add_development_dependency "curb", ">= 0.9.4"
-  spec.add_development_dependency "ethon", ">= 0.11.0"
-  spec.add_development_dependency "typhoeus", ">= 0.9.0"
-  spec.add_development_dependency "em-http-request", ">= 1.1.0"
-  spec.add_development_dependency "excon", ">= 0.60.0"
 end
