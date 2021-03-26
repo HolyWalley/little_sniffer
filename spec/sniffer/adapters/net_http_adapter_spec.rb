@@ -31,10 +31,64 @@ RSpec.describe Net::HTTP do
     http.request(request)
   end
 
-  it 'logs', enabled: true do
-    logger = double
-    Sniffer.config.logger = logger
-    expect(logger).to receive(:log).with(0, "{\"port\":4567,\"host\":\"localhost\",\"query\":\"/?lang=ruby&author=matz\",\"rq_accept_encoding\":\"gzip;q=1.0,deflate;q=0.6,identity;q=0.3\",\"rq_accept\":\"*/*\",\"rq_user_agent\":\"Ruby\",\"rq_host\":\"localhost:4567\",\"method\":\"GET\",\"request_body\":\"\",\"status\":200,\"rs_content_type\":\"text/html;charset=utf-8\",\"rs_x_xss_protection\":\"1; mode=block\",\"rs_x_content_type_options\":\"nosniff\",\"rs_x_frame_options\":\"SAMEORIGIN\",\"rs_content_length\":\"2\",\"timing\":0.0006,\"response_body\":\"OK\"}")
-    get_request
+  def load_yaml(path = nil)
+    yaml_directory = "#{Dir.pwd}/spec/yaml"
+    file_path = "#{yaml_directory}/#{path}.yaml"
+    file = File.read(file_path)
+    YAML.load(file)
+  end
+
+  let(:handler) do
+    Class.new do
+      attr_reader :data
+
+      def handle(data)
+        @data = data
+      end
+    end.new
+  end
+
+  let(:fldr) { "net_http" }
+
+  it 'calls handler and pass data on get request' do
+    allow(handler).to receive(:handle)
+
+    Sniffer::Adapters::NetHttpAdapter.new(handler).sniff do
+      get_request
+    end
+
+    expect(handler).to have_received(:handle).with(match_yaml_file("#{fldr}/get_response"))
+  end
+
+  it 'calls handler and pass data on get request with dynamic params' do
+    allow(handler).to receive(:handle)
+
+    Sniffer::Adapters::NetHttpAdapter.new(handler).sniff do
+      get_request_dynamic_params
+    end
+
+    expect(handler).to have_received(:handle).with(match_yaml_file("#{fldr}/get_response_dynamic"))
+  end
+
+  it 'calls handler and pass data on post request' do
+    allow(handler).to receive(:handle)
+
+    expect(handler.data).to eq(nil)
+
+    Sniffer::Adapters::NetHttpAdapter.new(handler).sniff do
+      post_request
+    end
+
+    expect(handler).to have_received(:handle).with(match_yaml_file("#{fldr}/post_response"))
+  end
+
+  it 'calls handler and pass data on json post request' do
+    allow(handler).to receive(:handle)
+
+    Sniffer::Adapters::NetHttpAdapter.new(handler).sniff do
+      post_json
+    end
+
+    expect(handler).to have_received(:handle).with(match_yaml_file("#{fldr}/json_response"))
   end
 end
