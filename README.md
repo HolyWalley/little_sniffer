@@ -33,7 +33,7 @@ require 'http'
 require 'little_sniffer'
 
 class YourHandler
-  def handle(data)
+  def call(data)
     pp data
   end
 end

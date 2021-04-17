@@ -22,7 +22,7 @@ class LittleSniffer
   private
 
   def validate_handler(handler)
-    return if handler.respond_to?(:handle)
+    return if handler.respond_to?(:call)
 
     raise HandlerDoesNotMatchTheInterfaceError
   end

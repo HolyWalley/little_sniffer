@@ -1,19 +1,10 @@
 # frozen_string_literal: true
 
 require "bundler/setup"
-require "httpclient"
-require "jsonclient"
 require 'base64'
-require 'http'
-require 'patron'
 require "net/http"
 require "uri"
 require "json"
-require "curl"
-require "typhoeus"
-require "ethon"
-require "em-http-request"
-require "excon"
 
 require "little_sniffer"
 require "pry-byebug"
@@ -23,6 +14,8 @@ Dir[File.expand_path(File.join(File.dirname(__FILE__), 'support', '**', '*.rb'))
 @server_thread = Thread.new do
   FakeWeb::App.run!
 end
+
+sleep 1 # wait until server starts
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

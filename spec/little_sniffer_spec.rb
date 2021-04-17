@@ -4,11 +4,7 @@ require "spec_helper"
 
 RSpec.describe LittleSniffer do
   let(:handler) do
-    Class.new do
-      def handle(data)
-        data
-      end
-    end.new
+    proc { |data| data }
   end
 
   let(:adapter) { instance_double(described_class::Adapters::NetHttpAdapter) }
@@ -27,7 +23,7 @@ RSpec.describe LittleSniffer do
     expect { described_class.new(handler, :unsupported) }.to raise_error(described_class::UnsupportedAdapterError)
   end
 
-  it "raises if handler doesnt support handle method" do
+  it "raises if handler doesnt support call method" do
     expect { described_class.new(Class.new, :net_http) }.to raise_error(described_class::HandlerDoesNotMatchTheInterfaceError)
   end
 

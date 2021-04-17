@@ -49,7 +49,7 @@ class LittleSniffer
             timing: bm
           }
 
-          handler.handle(data)
+          handler.call(data)
 
           @response
         end
