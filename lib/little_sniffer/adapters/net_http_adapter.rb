@@ -6,7 +6,7 @@ require "benchmark"
 class LittleSniffer
   module Adapters
     class NetHttpAdapter
-      def initialize(handler)
+      def initialize(handler:)
         @handler = handler
       end
 

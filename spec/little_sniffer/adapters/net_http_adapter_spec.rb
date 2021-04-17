@@ -46,7 +46,7 @@ RSpec.describe LittleSniffer::Adapters::NetHttpAdapter do
   it 'calls handler and pass data on get request' do
     allow(handler).to receive(:call)
 
-    described_class.new(handler).sniff do
+    described_class.new(handler: handler).sniff do
       get_request
     end
 
@@ -56,7 +56,7 @@ RSpec.describe LittleSniffer::Adapters::NetHttpAdapter do
   it 'calls handler and pass data on get request with dynamic params' do
     allow(handler).to receive(:call)
 
-    described_class.new(handler).sniff do
+    described_class.new(handler: handler).sniff do
       get_request_dynamic_params
     end
 
@@ -68,7 +68,7 @@ RSpec.describe LittleSniffer::Adapters::NetHttpAdapter do
 
     expect(handler.data).to eq(nil)
 
-    described_class.new(handler).sniff do
+    described_class.new(handler: handler).sniff do
       post_request
     end
 
@@ -78,7 +78,7 @@ RSpec.describe LittleSniffer::Adapters::NetHttpAdapter do
   it 'calls handler and pass data on json post request' do
     allow(handler).to receive(:call)
 
-    described_class.new(handler).sniff do
+    described_class.new(handler: handler).sniff do
       post_json
     end
 

@@ -7,10 +7,10 @@ require_relative "little_sniffer/adapters/net_http_adapter"
 class LittleSniffer
   HandlerDoesNotMatchTheInterfaceError = Class.new(StandardError)
 
-  def initialize(handler, adapter = Adapters::NetHttpAdapter, &block)
+  def initialize(handler:, adapter: Adapters::NetHttpAdapter, &block)
     validate_handler(handler)
 
-    adapter.new(handler).sniff(&block)
+    adapter.new(handler: handler).sniff(&block)
   end
 
   private
