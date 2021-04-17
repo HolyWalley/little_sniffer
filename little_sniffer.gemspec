@@ -20,10 +20,8 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_development_dependency "bundler", "~> 2"
-  spec.add_development_dependency "rake", ">= 12.3.3"
   spec.add_development_dependency "rspec", "~> 3.0"
-  spec.add_development_dependency "rubocop"
-  spec.add_development_dependency "pry-byebug"
-  spec.add_development_dependency "sinatra", "~> 2.0"
-  spec.add_development_dependency "puma", ">= 3.10.0"
+
+  spec.add_development_dependency "rack", '~> 2.2.3'
+  spec.add_development_dependency "thin", '~> 1.5.1'
 end

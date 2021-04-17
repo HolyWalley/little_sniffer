@@ -7,15 +7,14 @@ require "uri"
 require "json"
 
 require "little_sniffer"
-require "pry-byebug"
 
 Dir[File.expand_path(File.join(File.dirname(__FILE__), 'support', '**', '*.rb'))].sort.each { |f| require f }
 
 @server_thread = Thread.new do
-  FakeWeb::App.run!
+  Rack::Handler::Thin.run FakeWeb::App.new, Port: 4567
 end
 
-sleep 1 # wait until server starts
+sleep 1
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

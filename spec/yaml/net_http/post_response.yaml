@@ -15,10 +15,7 @@
 :response:
   :status: 201
   :headers:
-    content-type: text/html;charset=utf-8
-    x-xss-protection: 1; mode=block
-    x-content-type-options: nosniff
-    x-frame-options: SAMEORIGIN
+    server: thin 1.5.1 codename Straight Razor
     connection: close
     content-length: '7'
   :body: Created

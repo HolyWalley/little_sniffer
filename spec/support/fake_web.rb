@@ -1,19 +1,20 @@
 # frozen_string_literal: true
 
-require 'sinatra/base'
-
+require "rack"
+require "rack/handler/thin"
 module FakeWeb
-  class App < Sinatra::Base
-    get '/' do
-      [200, { "content-length" => "2" }, "OK"]
-    end
+  class App
+    def call(env)
+      req = Rack::Request.new(env)
 
-    post "/data" do
-      [201, { "content-length" => "7" }, "Created"]
-    end
-
-    post "/json" do
-      [200, { "content-type" => "text/json" }, "{\"status\":\"OK\"}"]
+      case req.path_info
+      when '/'
+        [200, { "content-length" => "2" }, "OK"]
+      when '/data'
+        [201, { "content-length" => "7" }, "Created"]
+      when '/json'
+        [200, { "content-type" => "text/json" }, "{\"status\":\"OK\"}"]
+      end
     end
   end
 end

@@ -16,8 +16,7 @@
   :status: 200
   :headers:
     content-type: text/json
-    x-content-type-options: nosniff
     connection: close
-    content-length: '15'
+    server: thin 1.5.1 codename Straight Razor
   :body: '{"status":"OK"}'
   :timing: 0.0006
