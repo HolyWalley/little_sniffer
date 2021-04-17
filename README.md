@@ -29,19 +29,13 @@ Or install it yourself as:
 Here's some simple examples to get you started:
 
 ```ruby
-require 'http'
+require 'net/http'
 require 'little_sniffer'
 
-class YourHandler
-  def call(data)
-    pp data
-  end
-end
+handler = proc { |data| puts data }
 
-handler = YourHandler.new
-
-LittleSniffer.new(handler) do
-  HTTP.get('http://example.com/?lang=ruby&author=matz')
+LittleSniffer.new(handler: handler) do
+  Net::HTTP.get(URI('http://example.com/?lang=ruby&author=matz'))
 end
 
 # => {:request=>
