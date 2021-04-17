@@ -5,15 +5,9 @@ require_relative "little_sniffer/adapters/net_http_adapter"
 
 # LittleSniffer allows to log http request locally
 class LittleSniffer
-  UnsupportedAdapterError = Class.new(StandardError)
   HandlerDoesNotMatchTheInterfaceError = Class.new(StandardError)
 
-  ADAPTERS_MAP = {
-    net_http: Adapters::NetHttpAdapter
-  }.freeze
-
-  def initialize(handler, adapter = :net_http, &block)
-    adapter = validate_adapter(adapter)
+  def initialize(handler, adapter = Adapters::NetHttpAdapter, &block)
     validate_handler(handler)
 
     adapter.new(handler).sniff(&block)
@@ -25,14 +19,5 @@ class LittleSniffer
     return if handler.respond_to?(:call)
 
     raise HandlerDoesNotMatchTheInterfaceError
-  end
-
-  def validate_adapter(adapter)
-    adapter = ADAPTERS_MAP[adapter]
-
-    return adapter if adapter
-
-    error_message = "maybe you have misspelled it. Appropriate types are: #{ADAPTERS_MAP.keys.join(', ')}"
-    raise UnsupportedAdapterError, error_message
   end
 end
